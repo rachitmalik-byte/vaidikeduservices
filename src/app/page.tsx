@@ -18,10 +18,7 @@ import {
   IconCheck,
 } from '@/components/icons';
 
-const FluidWave = dynamic(() => import('@/components/three/FluidWave'), {
-  ssr: false,
-  loading: () => <div className="gradient-fallback absolute inset-0" />,
-});
+import SvgWaves from '@/components/layout/SvgWaves';
 
 /* ===== VALUE PROPS DATA ===== */
 const valueProps = [
@@ -107,12 +104,8 @@ export default function HomePage() {
     <main>
       {/* ===== HERO SECTION ===== */}
       <section className="relative min-h-screen flex items-center overflow-hidden" style={{ background: '#F7FAFA' }}>
-        {/* Three.js Background */}
-        <div className="three-canvas-container">
-          <Suspense fallback={<div className="gradient-fallback absolute inset-0" />}>
-            <FluidWave />
-          </Suspense>
-        </div>
+        {/* Svg Background Waves */}
+        <SvgWaves />
 
         {/* Hero Content */}
         <div className="relative z-10 w-full max-w-[1320px] mx-auto" style={{ paddingLeft: 'clamp(1.5rem, 4vw, 4rem)', paddingRight: 'clamp(1.5rem, 4vw, 4rem)' }}>
@@ -136,10 +129,10 @@ export default function HomePage() {
 
               {/* Heading */}
               <h1
-                className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] mb-6 animate-fade-in-up"
+                className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6 animate-fade-in-up"
                 style={{
                   fontFamily: 'var(--font-syne)',
-                  color: '#1A1A1A',
+                  color: '#0A3D3D',
                   animationDelay: '400ms',
                   animationFillMode: 'backwards',
                 }}
@@ -147,14 +140,7 @@ export default function HomePage() {
                 Learn Smarter,
                 <br />
                 <span
-                  className="animate-gradient"
-                  style={{
-                    background: 'linear-gradient(135deg, #0D5C5C, #2AA6A6, #5CC9B5, #7EDCCA)',
-                    backgroundSize: '200% 200%',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                  }}
+                  className="bg-gradient-to-r from-[#2AA6A6] to-[#5CC9B5] bg-clip-text text-transparent"
                 >
                   Grow Faster.
                 </span>
@@ -517,21 +503,21 @@ export default function HomePage() {
           </ScrollReveal>
 
           <ScrollReveal>
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-4xl mx-auto glass-card rounded-3xl p-8 md:p-12 border border-white/25 shadow-[0_12px_40px_rgba(10,61,61,0.05)] bg-white/75 backdrop-blur-md">
               {/* Quote */}
-              <div className="relative mb-12">
+              <div className="relative mb-8">
                 {/* Large quote mark */}
                 <div
-                  className="absolute -top-4 -left-2 text-8xl font-bold leading-none select-none"
-                  style={{ color: 'rgba(42,166,166,0.1)', fontFamily: 'Georgia, serif' }}
+                  className="absolute -top-8 -left-4 text-8xl font-bold leading-none select-none"
+                  style={{ color: 'rgba(42,166,166,0.12)', fontFamily: 'Georgia, serif' }}
                 >
                   &ldquo;
                 </div>
 
                 <div className="relative">
                   <p
-                    className="text-xl md:text-2xl lg:text-3xl leading-relaxed font-medium transition-all duration-700"
-                    style={{ fontFamily: 'var(--font-syne)', color: '#1A1A1A' }}
+                    className="text-lg md:text-xl lg:text-2xl leading-relaxed font-medium transition-all duration-700"
+                    style={{ fontFamily: 'var(--font-syne)', color: '#0A3D3D' }}
                   >
                     {testimonials[activeTestimonial].quote}
                   </p>
@@ -620,7 +606,7 @@ export default function HomePage() {
                 <div className="flex flex-wrap items-center justify-center gap-4">
                   <Link
                     href="/courses"
-                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-base transition-all duration-400 group"
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-semibold text-base transition-all duration-400 group hover:-translate-y-0.5"
                     style={{
                       background: 'white',
                       color: '#0D5C5C',
@@ -632,7 +618,7 @@ export default function HomePage() {
                   </Link>
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-base transition-all duration-400 group"
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-semibold text-base transition-all duration-400 group hover:-translate-y-0.5"
                     style={{
                       background: 'transparent',
                       color: 'white',

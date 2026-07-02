@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Syne, Inter } from "next/font/google";
+import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "../styles/globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
-const syne = Syne({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-syne",
   weight: ["400", "500", "600", "700", "800"],
@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${syne.variable} ${inter.variable} h-full scroll-smooth`}
+      className={`${plusJakartaSans.variable} ${inter.variable} h-full scroll-smooth`}
     >
       <body className="min-h-full flex flex-col bg-white text-[#1A1A1A] antialiased" style={{ fontFamily: "var(--font-inter), sans-serif" }}>
         <Navbar />

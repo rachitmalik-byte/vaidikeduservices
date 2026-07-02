@@ -12,17 +12,21 @@ export const VaidikLogo: React.FC<IconProps & { showText?: boolean }> = ({
   showText = false 
 }) => (
   <div className={`flex items-center gap-3 ${className}`}>
-    <svg width={size} height={size * 1.1} viewBox="0 0 120 132" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Main V shape */}
-      <path d="M60 132L0 20H24L60 92L96 20H120L60 132Z" fill="url(#vaidik-gradient)" />
-      {/* Person figure - head */}
-      <circle cx="78" cy="12" r="10" fill="#5CC9B5" />
-      {/* Person figure - book/mortarboard */}
-      <rect x="52" y="6" width="24" height="8" rx="2" fill="#5CC9B5" />
-      {/* Diamond accent */}
-      <path d="M82 82L92 96L82 110L72 96L82 82Z" fill="#7EDCCA" opacity="0.9" />
+    <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Main V shape (solid) */}
+      <path d="M 15 20 H 30 L 55 75 L 70 40 H 82 L 62 95 H 50 Z" fill="url(#vaidik-gradient)" />
+      
+      {/* Horizontal shoulder loop (hollow) */}
+      <path fillRule="evenodd" clipRule="evenodd" d="M 35 25 H 72 L 67 35 H 31 Z M 37 28 H 67 L 64 32 H 35 Z" fill="url(#vaidik-gradient)" />
+      
+      {/* Circle (head) */}
+      <circle cx="78" cy="28" r="7.5" fill="url(#vaidik-gradient)" />
+      
+      {/* Bottom right loop (hollow) */}
+      <path fillRule="evenodd" clipRule="evenodd" d="M 62 62 L 75 92 H 92 L 79 62 Z M 68 67 L 77 87 H 87 L 78 67 Z" fill="url(#vaidik-gradient)" />
+      
       <defs>
-        <linearGradient id="vaidik-gradient" x1="0" y1="20" x2="120" y2="132" gradientUnits="userSpaceOnUse">
+        <linearGradient id="vaidik-gradient" x1="15" y1="20" x2="92" y2="95" gradientUnits="userSpaceOnUse">
           <stop stopColor="#2AA6A6" />
           <stop offset="1" stopColor="#5CC9B5" />
         </linearGradient>

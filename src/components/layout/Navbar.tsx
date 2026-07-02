@@ -65,14 +65,14 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative px-4 py-2 text-[0.9375rem] font-medium transition-colors duration-300 rounded-lg group ${
+                  className={`relative px-4 py-2 text-[0.9375rem] font-semibold transition-colors duration-300 rounded-lg group ${
                     isActive ? 'text-[#2AA6A6]' : 'text-[#4A4A4A] hover:text-[#2AA6A6]'
                   }`}
                 >
@@ -95,8 +95,7 @@ export default function Navbar() {
           <div className="flex items-center gap-4">
             <Link
               href="/contact"
-              className="hidden lg:inline-flex magnetic-btn-primary text-sm py-2.5 px-6"
-              style={{ borderRadius: '100px', fontWeight: 600, fontSize: '0.875rem' }}
+              className="hidden lg:inline-flex items-center justify-center text-white bg-gradient-to-r from-[#0D5C5C] to-[#2AA6A6] hover:from-[#2AA6A6] hover:to-[#5CC9B5] text-sm font-semibold py-2.5 px-6 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg shadow-[0_4px_12px_rgba(42,166,166,0.25)]"
             >
               Get Started
             </Link>
