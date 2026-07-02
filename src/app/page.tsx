@@ -164,11 +164,11 @@ export default function HomePage() {
                 className="flex flex-wrap items-center gap-4 animate-fade-in-up"
                 style={{ animationDelay: '800ms', animationFillMode: 'backwards' }}
               >
-                <Link href="/courses" className="magnetic-btn magnetic-btn-primary group">
+                <Link href="/courses" className="btn-premium-primary group">
                   Explore Services
                   <IconArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
-                <Link href="/about" className="magnetic-btn magnetic-btn-secondary group">
+                <Link href="/about" className="btn-premium-secondary group">
                   Our Story
                   <IconArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </Link>
@@ -288,24 +288,9 @@ export default function HomePage() {
             {valueProps.map((prop, i) => (
               <ScrollReveal key={prop.title} delay={i * 150} direction="up">
                 <div
-                  className="group relative p-8 lg:p-10 rounded-3xl transition-all duration-500 cursor-pointer light-sweep overflow-hidden"
-                  style={{
-                    background: '#F7FAFA',
-                    border: '1px solid rgba(42,166,166,0.08)',
-                    marginTop: i === 1 ? '2rem' : '0',
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.background = '#FFFFFF';
-                    (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 48px rgba(10, 61, 61, 0.1)';
-                    (e.currentTarget as HTMLElement).style.borderColor = `${prop.accent}30`;
-                    (e.currentTarget as HTMLElement).style.transform = 'translateY(-8px)';
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.background = '#F7FAFA';
-                    (e.currentTarget as HTMLElement).style.boxShadow = 'none';
-                    (e.currentTarget as HTMLElement).style.borderColor = 'rgba(42,166,166,0.08)';
-                    (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
-                  }}
+                  className={`premium-card p-8 lg:p-10 cursor-pointer flex flex-col justify-between ${
+                    i === 1 ? 'md:translate-y-6' : ''
+                  }`}
                 >
                   {/* Glow background on hover */}
                   <div

@@ -30,141 +30,90 @@ export default function Navbar() {
     setIsMobileOpen(false);
   }, [pathname]);
 
-  useEffect(() => {
-    if (isMobileOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => { document.body.style.overflow = ''; };
-  }, [isMobileOpen]);
-
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled
-            ? 'py-3 bg-white/70 backdrop-blur-2xl shadow-[0_1px_20px_rgba(10,61,61,0.06)] border-b border-white/30'
-            : 'py-5 bg-transparent'
-        }`}
-        style={{ willChange: 'transform, background-color' }}
-      >
-        <div className="max-w-[1320px] mx-auto flex items-center justify-between" style={{ paddingLeft: 'clamp(1.5rem, 4vw, 4rem)', paddingRight: 'clamp(1.5rem, 4vw, 4rem)' }}>
+      <header className={`floating-nav ${isScrolled ? 'scrolled' : ''}`}>
+        <div className="h-full px-6 md:px-8 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="relative z-10 flex items-center gap-2.5 group" aria-label="Vaidik Home">
-            <VaidikLogo size={36} />
-            <span
-              className="text-xl font-bold tracking-tight transition-colors duration-300"
-              style={{
-                color: isScrolled ? '#1A1A1A' : '#1A1A1A',
-                fontFamily: 'var(--font-syne)',
-              }}
+          <Link href="/" className="flex items-center gap-3 group relative z-50">
+            <VaidikLogo size={32} />
+            <span 
+              className="text-[1.125rem] font-bold tracking-wider text-brand-teal-800" 
+              style={{ fontFamily: 'var(--font-syne)' }}
             >
               VAIDIK
             </span>
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-8">
+          {/* Desktop Links */}
+          <nav className="hidden md:flex items-center gap-1 bg-brand-cream/50 p-1 rounded-full border border-black/5">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative px-4 py-2 text-[0.9375rem] font-semibold transition-colors duration-300 rounded-lg group ${
-                    isActive ? 'text-[#2AA6A6]' : 'text-[#4A4A4A] hover:text-[#2AA6A6]'
+                  className={`px-4 py-1.5 rounded-full text-sm font-semibold tracking-wide transition-all duration-300 ${
+                    isActive 
+                      ? 'bg-brand-teal-700 text-white shadow-sm' 
+                      : 'text-brand-charcoal/70 hover:text-brand-teal-700 hover:bg-black/5'
                   }`}
                 >
                   {link.label}
-                  {/* Active indicator line */}
-                  <span
-                    className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] rounded-full transition-all duration-500 ${
-                      isActive
-                        ? 'w-6 bg-[#2AA6A6]'
-                        : 'w-0 bg-[#2AA6A6] group-hover:w-4'
-                    }`}
-                    style={{ transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
-                  />
                 </Link>
               );
             })}
           </nav>
 
-          {/* CTA + Mobile Toggle */}
+          {/* CTA + Mobile Menu Button */}
           <div className="flex items-center gap-4">
-            <Link
-              href="/contact"
-              className="hidden lg:inline-flex items-center justify-center text-white bg-gradient-to-r from-[#0D5C5C] to-[#2AA6A6] hover:from-[#2AA6A6] hover:to-[#5CC9B5] text-sm font-semibold py-2.5 px-6 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg shadow-[0_4px_12px_rgba(42,166,166,0.25)]"
+            <Link 
+              href="/contact" 
+              className="hidden sm:inline-flex btn-premium-primary !py-2 !px-5 text-sm"
             >
               Get Started
             </Link>
 
-            {/* Mobile menu toggle */}
             <button
-              className="lg:hidden relative z-10 p-2 rounded-xl transition-colors duration-300 hover:bg-black/5"
               onClick={() => setIsMobileOpen(!isMobileOpen)}
-              aria-label="Toggle menu"
-              aria-expanded={isMobileOpen}
+              className="md:hidden relative z-50 p-2 text-brand-teal-800 hover:bg-black/5 rounded-full transition-colors"
+              aria-label="Toggle Menu"
             >
-              {isMobileOpen ? (
-                <IconClose size={24} className="text-[#1A1A1A]" />
-              ) : (
-                <IconMenu size={24} className="text-[#1A1A1A]" />
-              )}
+              {isMobileOpen ? <IconClose size={22} /> : <IconMenu size={22} />}
             </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile Full-Screen Overlay */}
-      <div
-        className={`fixed inset-0 z-40 transition-all duration-700 lg:hidden ${
+      {/* Mobile Menu Overlay */}
+      <div 
+        className={`fixed inset-0 z-40 bg-brand-teal-900/90 backdrop-blur-md md:hidden transition-all duration-500 ${
           isMobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
-        style={{ transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
       >
-        {/* Background */}
-        <div
-          className={`absolute inset-0 bg-white/95 backdrop-blur-3xl transition-transform duration-700 ${
-            isMobileOpen ? 'translate-y-0' : '-translate-y-full'
-          }`}
-          style={{ transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
-        />
-
-        {/* Nav Links */}
-        <nav className="relative flex flex-col items-center justify-center h-full gap-2">
-          {navLinks.map((link, i) => {
+        <nav className="h-full flex flex-col items-center justify-center gap-6">
+          {navLinks.map((link, idx) => {
             const isActive = pathname === link.href;
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                onClick={() => setIsMobileOpen(false)}
-                className={`text-3xl font-semibold transition-all duration-500 py-3 ${
-                  isActive ? 'text-[#2AA6A6]' : 'text-[#1A1A1A] hover:text-[#2AA6A6]'
-                } ${isMobileOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-                style={{
+                className={`text-2xl font-bold tracking-wide transition-all duration-300 ${
+                  isActive ? 'text-brand-mint' : 'text-white/70 hover:text-white'
+                } ${isMobileOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
+                style={{ 
                   fontFamily: 'var(--font-syne)',
-                  transitionDelay: isMobileOpen ? `${150 + i * 80}ms` : '0ms',
-                  transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+                  transitionDelay: `${idx * 70}ms`
                 }}
               >
                 {link.label}
               </Link>
             );
           })}
-
           <Link
             href="/contact"
-            onClick={() => setIsMobileOpen(false)}
-            className={`magnetic-btn-primary mt-6 transition-all duration-500 ${
-              isMobileOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
-            style={{
-              transitionDelay: isMobileOpen ? '550ms' : '0ms',
-              transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
-            }}
+            className={`btn-premium-primary mt-4 ${isMobileOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
+            style={{ transitionDelay: `${navLinks.length * 70}ms` }}
           >
             Get Started
           </Link>
