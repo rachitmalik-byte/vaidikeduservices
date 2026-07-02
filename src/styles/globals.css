@@ -173,3 +173,180 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--vaidik-teal-500);
 }
+
+/* ===== CSS PROPERTY FOR GRADIENT BORDER ROTATION ===== */
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes spin-border {
+  from { --border-angle: 0deg; }
+  to { --border-angle: 360deg; }
+}
+
+.btn-border-wrap {
+  position: relative;
+  display: inline-flex;
+  padding: 2px;
+  border-radius: 100px;
+  background: transparent;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-border-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 100px;
+  padding: 2px;
+  background: conic-gradient(from var(--border-angle), var(--vaidik-teal-500), var(--vaidik-teal-900), var(--vaidik-mint-400), var(--vaidik-teal-900), var(--vaidik-teal-500));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  animation: spin-border 4s linear infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Slide hover effect button */
+.btn-slide-hover {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 100px;
+  background: var(--vaidik-charcoal);
+  color: var(--vaidik-white);
+  padding: 0.75rem 1.75rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  overflow: hidden;
+  cursor: pointer;
+  transition: color 0.4s ease;
+  border: none;
+  z-index: 2;
+}
+
+.btn-slide-hover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--vaidik-teal-500) 0%, var(--vaidik-mint-400) 100%);
+  transform: translateX(-100%);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: -1;
+  border-radius: 100px;
+}
+
+.btn-slide-hover:hover {
+  color: var(--vaidik-white);
+}
+
+.btn-slide-hover:hover::after {
+  transform: translateX(0);
+}
+
+/* Slide hover from right */
+.btn-slide-hover-right::after {
+  transform: translateX(100%);
+}
+
+.btn-slide-hover-right:hover::after {
+  transform: translateX(0);
+}
+
+/* ===== ORBIT VISUALIZATION ANIMATIONS ===== */
+@keyframes spin-clockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-counterclockwise {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+.orbit-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orbit-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: linear-gradient(180deg, rgba(92, 201, 181, 0) 0%, rgba(92, 201, 181, 0.4) 43%, rgba(92, 201, 181, 0) 100%) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
+
+.orbit-ring-1 {
+  width: 353px;
+  height: 353px;
+  animation: spin-counterclockwise 35s linear infinite;
+}
+
+.orbit-ring-2 {
+  width: 501px;
+  height: 501px;
+  animation: spin-clockwise 45s linear infinite;
+}
+
+.orbit-ring-3 {
+  width: 649px;
+  height: 649px;
+  animation: spin-clockwise 55s linear infinite;
+}
+
+.orbit-ring-4 {
+  width: 797px;
+  height: 797px;
+  animation: spin-counterclockwise 65s linear infinite;
+}
+
+/* Counter-rotate elements to keep them upright */
+.counter-rotate-1 { animation: spin-clockwise 35s linear infinite; }
+.counter-rotate-2 { animation: spin-counterclockwise 45s linear infinite; }
+.counter-rotate-3 { animation: spin-counterclockwise 55s linear infinite; }
+.counter-rotate-4 { animation: spin-clockwise 65s linear infinite; }
+
+/* ===== LOGO MARQUEE TICKER ===== */
+.marquee-container {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  width: 100%;
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.marquee-content {
+  display: flex;
+  gap: 64px;
+  animation: marquee 25s linear infinite;
+  white-space: nowrap;
+}
+
+/* Typewriter blinking cursor */
+.typewriter-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1.1em;
+  background-color: var(--vaidik-teal-500);
+  margin-left: 3px;
+  animation: blink 0.8s steps(2, start) infinite;
+  vertical-align: middle;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
